@@ -111,7 +111,7 @@ Read more here: [http://developers.facebook.com/docs/reference/plugins/login/](h
 2.
 This allows you to create your own styling for login buttons or to apply login to a link or other event:
 
-login()
+	login()
 
 For example:
 
