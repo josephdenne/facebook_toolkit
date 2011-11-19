@@ -96,6 +96,7 @@ There are two options for the manifestation of the login button:
 2. Facebook login event
 
 1.
+
 	<div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="1"></div>
 
 ![Standard Facebook login button](http://josephdenne.com/workspace/images/screenshots/facebook-toolkit/standard-login-button.png)
@@ -109,6 +110,7 @@ You can change the text of this button by placing your own copy within the div:
 Read more here: [http://developers.facebook.com/docs/reference/plugins/login/](http://developers.facebook.com/docs/reference/plugins/login/)
 
 2.
+
 This allows you to create your own styling for login buttons or to apply login to a link or other event:
 
 	login()
