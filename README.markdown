@@ -56,6 +56,12 @@ This extension enables Symphony in this context.
 
 ## Usage
 
+You will need to have setup a companion Facebook applicaiton within Facebook. This is very straight forward and can be done here:
+
+[https://developers.facebook.com/apps](https://developers.facebook.com/apps)
+
+Once you have setup your application in Facebook:
+
 1. Add your Facebook applicaiton ID and application secret to your preferences
 2. Attach the event "Facebook login" to your page(s) or set it as a global event
 3. Add the Facebook login button to your page or trigger the login event directly (exampels below)
