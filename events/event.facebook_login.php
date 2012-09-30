@@ -2,7 +2,7 @@
 
 	if(!defined('__IN_SYMPHONY__')) die('<h2>Error</h2><p>You cannot directly access this file</p>');
 
-	require_once(DOCROOT . '/extensions/facebook_toolkit/lib/facebook.php');
+	require_once(DOCROOT . '/extensions/facebook_toolkit/lib/facebook-php-sdk/src/facebook.php');
 
 	Class eventFacebook_Login extends Event {
 
