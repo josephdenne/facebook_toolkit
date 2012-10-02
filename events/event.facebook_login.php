@@ -67,7 +67,7 @@
 				}
 				return false;
 			}
-
+			
 			$result = new XMLElement('facebook');
 			
 			$result->setAttribute('logged-in', ($user) ? 'true' : 'false');
@@ -75,7 +75,6 @@
 			
 			// User object tracking
 			if ($user) {
-				$result->setAttribute('logged-in', 'true');
 
 				$result->setAttributeArray(array('id' => $user_profile['id']));
 
