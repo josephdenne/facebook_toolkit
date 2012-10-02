@@ -31,13 +31,10 @@
 
 		protected function __trigger() {
 
-			// Load preferences data
-			$config = $this->_Parent->Configuration->get();
-
 			// Create the Facebook application instance
 			$facebook = new Facebook(array(
-				'appId'  => $config['facebook']['application_id'],
-				'secret' => $config['facebook']['application_secret'],
+				'appId'  => Symphony::Configuration()->get('application_id', 'facebook'),
+				'secret' => Symphony::Configuration()->get('application_secret', 'facebook'),
 			));
 
 			// Get the Facebook user ID
@@ -71,32 +68,14 @@
 				return false;
 			}
 
-			if($signed_request = parsePageSignedRequest()) {
-
-				if($signed_request->page->liked) {
-
-					// Page liked
-					$pageliked = true;
-				}
-				else {
-
-					// Page not liked
-					$pageliked = false;
-				}
-			}
-
+			$result = new XMLElement('facebook');
+			
+			$result->setAttribute('logged-in', ($user) ? 'true' : 'false');
+			$result->setAttribute('page-liked', ($signed_request = parsePageSignedRequest() && $signed_request->page->liked) ? 'true' : 'false');
+			
 			// User object tracking
 			if ($user) {
-
-				$result = new XMLElement('facebook');
 				$result->setAttribute('logged-in', 'true');
-
-				if ($pageliked == true) {
-					$result->setAttribute('page-liked', 'true');
-				}
-				else {
-					$result->setAttribute('page-liked', 'false');
-				}
 
 				$result->setAttributeArray(array('id' => $user_profile['id']));
 
@@ -112,19 +91,7 @@
 
 				foreach($fields as $f) $result->appendChild($f);
 			}
-			else {
-
-				$result = new XMLElement('facebook');
-				$result->setAttribute('logged-in', 'false');
-
-				if ($pageliked == true) {
-					$result->setAttribute('page-liked', 'true');
-				}
-				else {
-					$result->setAttribute('page-liked', 'false');
-				}
-			}
-
+			
 			return $result;
 		}
 	}
