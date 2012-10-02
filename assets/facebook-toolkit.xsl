@@ -7,14 +7,24 @@
 				<style type="text/css">
 					#facebook-toolkit-debug-container {
 						position: fixed;
-						width: 200px;
-						top: 0;
-						left: 0;
-						height: 200px;
-						opacity: 0.8;
-						border: 1px solid red;
-						background: #ccc;
+						width: 100px;
+						top: 5px;
+						left: 5px;
+						opacity: 0.9;
+						border: 3px solid #111;
+						background: #444;
 						color: white;
+						z-index: 1000;
+						font-size: 10px;
+						line-height: 1.5;
+						padding: 4px;
+						border-radius: 4px;
+					}
+					
+					#facebook-toolkit-debug-container a {
+						display: block;
+						color: #eee;
+						text-decoration: underline;
 					}
 				</style>
 				<div>
@@ -24,8 +34,7 @@
 					Logged in: <xsl:value-of select="/data/events/facebook/@logged-in" />
 				</div>
 				<div>
-					<a href="https://www.facebook.com/dialog/pagetab?app_id={$facebook-application-id}
-			&amp;display=popup&amp;next={$root}">
+					<a href="https://www.facebook.com/dialog/pagetab?app_id={$facebook-application-id}&amp;display=popup&amp;next=http://facebook.com/">
 						Add this App as a page tab to an existing page.
 					</a>
 				</div>

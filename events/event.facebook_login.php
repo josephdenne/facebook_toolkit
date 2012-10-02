@@ -67,11 +67,15 @@
 				}
 				return false;
 			}
+
+			if($signed_request = parsePageSignedRequest()) {
+				$pageliked = (bool)$signed_request->page->liked;
+			}
 			
 			$result = new XMLElement('facebook');
 			
 			$result->setAttribute('logged-in', ($user) ? 'true' : 'false');
-			$result->setAttribute('page-liked', ($signed_request = parsePageSignedRequest() && $signed_request->page->liked) ? 'true' : 'false');
+			$result->setAttribute('page-liked', ($pageliked) ? 'true' : 'false');
 			
 			// User object tracking
 			if ($user) {
