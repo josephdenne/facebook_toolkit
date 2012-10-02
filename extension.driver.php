@@ -3,9 +3,9 @@
 	Class extension_facebook_toolkit extends Extension {
 
 		public function about(){
-			return array('name' => 'Facebook toolkit',
-						 'version' => '1.0 beta',
-						 'release-date' => '2011-11-19',
+			return array('name' => 'Facebook Toolkit',
+						 'version' => '1.1',
+						 'release-date' => '2012-10-01',
 						 'author' => array('name' => 'Joseph Denne',
 										   'website' => 'http://josephdenne.com/',
 										   'email' => 'me@josephdenne.com')
@@ -49,12 +49,28 @@
 					'delegate' => 'AppendEventFilterDocumentation',
 					'callback' => 'cbAppendEventFilterDocumentation'
 				),
+
+				array(
+					'page' => '/frontend/',
+					'delegate' => 'FrontendParamsResolve',
+					'callback' => 'appendAppParams'
+				),
 			);
 		}
-
+		
+		public function install() {
+			if (!file_exists(DOCROOT . '/extensions/facebook_toolkit/lib/facebook-php-sdk/src/facebook.php')) {
+				if(isset(Administration::instance()->Page)){
+					Administration::instance()->Page->pageAlert(__('Could not find Facebook SDK at "extensions/facebook_toolkit/lib/facebook-php-sdk/src/facebook.php". See readme for more info.'));
+				}
+				return false;
+			}
+			return true;
+		}
+		
 		public function uninstall() {
 			Symphony::Configuration()->remove('facebook');
-			$this->_Parent->saveConfig();
+			return Symphony::Configuration()->write();
 		}
 
 		public function cbAppendPreferences($context){
@@ -76,6 +92,14 @@
 			$group->appendChild($div);
 
 			$context['wrapper']->appendChild($group);
+		}
+		
+		public function appendAppParams($context) {
+			//Adds the app key to Symphony page params. 
+			$context['params']['facebook-application-id'] = Symphony::Configuration()->get('application_id', 'facebook');
+			
+			//No reason to have the application secret output as part of page params, but leaving this here anyway. 
+			//$context['params']['facebook-app-secret'] = Symphony::Configuration()->get('application_secret', 'facebook');
 		}
 	}
 
