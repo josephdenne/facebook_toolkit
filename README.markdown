@@ -1,15 +1,15 @@
 # Facebook toolkit
 
-* Version: 1.0
+* Version: 1.1
 * Author: Joseph Denne (me@josephdenne.com)
-* Build Date: 19th November 2011
+* Build Date: 30 September 2012
 * Requirements: Symphony 2.2 or later
 
 ## Summary
 
 This extension is designed to provide baseline functionality for Facebook applications and Facebook authenticating sites.
 
-It provides an event that enables login functioanlity with Facebook, returning basic Facebook user object details:
+It provides an event that enables login functionality with Facebook, returning basic Facebook user object details:
 
 - Facebook ID
 - First name
@@ -35,38 +35,40 @@ There are two main uses for this extension:
 
 1.
 
-Piggy backing Facebook for login functionality on a site removes the requirement for potentually complex CRM within a build as you do not have to concern yourself with concepts such as user account validation, sign up forms and profile management.
+Piggy backing Facebook for login functionality on a site removes the requirement for potentially complex CRM within a build as you do not have to concern yourself with concepts such as user account validation, sign up forms and profile management.
 
 In addition, because Facebook accounts are socially connected, the accuracy of the data that it provides is higher, going some way to combating issues such as spam.
 
-Using Facebook for authentication does not remove your ability to collect user data for CRM. You can easilly setup a section for the collection of the information that the Facebook user object provides, refreshing this each time a user returns to your site.
+Using Facebook for authentication does not remove your ability to collect user data for CRM. You can easily setup a section for the collection of the information that the Facebook user object provides, refreshing this each time a user returns to your site.
 
 Note: this extension can happily live alongside the members extension, providing your users with a choice of login method
 
 2.
 
-As Facebook applications growin complexitity and scope, there is a growing need for a content management solution to enable content updates and user generated content moderation.
+As Facebook applications grow in complexity and scope, there is a growing need for a content management solution to enable content updates and user generated content moderation.
 
 This extension enables Symphony in this context.
 
 ## Installation
 
-** Note: The latest version can alway be grabbed with "git clone git@github.com:josephdenne/facebook_toolkit.git"
-
 1. Rename the extension folder to 'facebook_toolkit' and upload it to your Symphony 'extensions' folder
 2. Enable it by selecting "Facebook toolkit", choosing "Enable" from the with-selected menu, then clicking "Apply"
 
+If you get an error stating "Could not find Facebook SDK" you need to make sure the SDK exists in the extensions/facebook_toolkit/lib/facebook-php-sdk folder. If you installed the extension as a git submodule, you need to initialise and update submodules for the extension, by executing `git submodule update --init --recursive` from the root of your repo. 
+
+Otherwise, download the latest version of the SDK from [https://github.com/facebook/facebook-php-sdk] and place it in the `extensions/facebook_toolkit/lib` directory. 
+
 ## Usage
 
-You will need to have setup a companion Facebook applicaiton within Facebook. This is very straight forward and can be done here:
+You will need to have setup a companion Facebook application within Facebook. This is very straight forward and can be done here:
 
 [https://developers.facebook.com/apps](https://developers.facebook.com/apps)
 
 Once you have setup your application in Facebook:
 
-1. Add your Facebook applicaiton ID and application secret to your preferences
+1. Add your Facebook application ID and application secret to your preferences
 2. Attach the event "Facebook login" to your page(s) or set it as a global event
-3. Add the Facebook login button to your page or trigger the login event directly (exampels below)
+3. Add the Facebook login button to your page or trigger the login event directly (examples below)
 
 ### Facebook login
 
@@ -76,7 +78,7 @@ You will need to add the following to all pages that require a user to be able t
 	<script>
 		window.fbAsyncInit = function() {
 			FB.init({
-				appId: 'YOUR APPLICATION ID',
+				appId: '<xsl:value-of select="/data/params/facebook-application-id" />',
 				cookie: true,
 				xfbml: true,
 				oauth: true
@@ -142,7 +144,10 @@ For example:
 
 ### Non logged in user
 
-	<facebook logged-in="false" page-liked="false" />
+Note that page can be liked and tracked without requiring login. 
+No data about the user can be retrieved though.
+
+	<facebook logged-in="false" page-liked="true" />
 
 ### Logged in user
 

@@ -2,7 +2,7 @@
 
 	if(!defined('__IN_SYMPHONY__')) die('<h2>Error</h2><p>You cannot directly access this file</p>');
 
-	require_once(DOCROOT . '/extensions/facebook_toolkit/lib/facebook.php');
+	require_once(DOCROOT . '/extensions/facebook_toolkit/lib/facebook-php-sdk/src/facebook.php');
 
 	Class eventFacebook_Login extends Event {
 
@@ -31,13 +31,10 @@
 
 		protected function __trigger() {
 
-			// Load preferences data
-			$config = $this->_Parent->Configuration->get();
-
 			// Create the Facebook application instance
 			$facebook = new Facebook(array(
-				'appId'  => $config['facebook']['application_id'],
-				'secret' => $config['facebook']['application_secret'],
+				'appId'  => Symphony::Configuration()->get('application_id', 'facebook'),
+				'secret' => Symphony::Configuration()->get('application_secret', 'facebook'),
 			));
 
 			// Get the Facebook user ID
@@ -72,31 +69,16 @@
 			}
 
 			if($signed_request = parsePageSignedRequest()) {
-
-				if($signed_request->page->liked) {
-
-					// Page liked
-					$pageliked = true;
-				}
-				else {
-
-					// Page not liked
-					$pageliked = false;
-				}
+				$pageliked = (bool)$signed_request->page->liked;
 			}
-
+			
+			$result = new XMLElement('facebook');
+			
+			$result->setAttribute('logged-in', ($user) ? 'true' : 'false');
+			$result->setAttribute('page-liked', ($pageliked) ? 'true' : 'false');
+			
 			// User object tracking
 			if ($user) {
-
-				$result = new XMLElement('facebook');
-				$result->setAttribute('logged-in', 'true');
-
-				if ($pageliked == true) {
-					$result->setAttribute('page-liked', 'true');
-				}
-				else {
-					$result->setAttribute('page-liked', 'false');
-				}
 
 				$result->setAttributeArray(array('id' => $user_profile['id']));
 
@@ -112,19 +94,7 @@
 
 				foreach($fields as $f) $result->appendChild($f);
 			}
-			else {
-
-				$result = new XMLElement('facebook');
-				$result->setAttribute('logged-in', 'false');
-
-				if ($pageliked == true) {
-					$result->setAttribute('page-liked', 'true');
-				}
-				else {
-					$result->setAttribute('page-liked', 'false');
-				}
-			}
-
+			
 			return $result;
 		}
 	}
