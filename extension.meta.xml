@@ -22,7 +22,7 @@
 		</author>
 	</authors>
 	<releases>
-		<release version="1.1" date="2012-10-1" min="2.3">
+		<release version="1.1" date="2012-10-1" min="2.3" max="2.3.2">
 			- Symphony 2.3 compatibility
 			- Adds Facebook API key for access via frontend page params
 			- Updates Facebook PHP SDK to 3.2.0, and includes it as a submodule
