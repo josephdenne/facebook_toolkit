@@ -2,16 +2,6 @@
 
 	Class extension_facebook_toolkit extends Extension {
 
-		public function about() {
-			return array('name' => 'Facebook Toolkit',
-						 'version' => '1.1',
-						 'release-date' => '2012-10-01',
-						 'author' => array('name' => 'Joseph Denne',
-										   'website' => 'http://josephdenne.com/',
-										   'email' => 'mail@josephdenne.com')
-				 		);
-		}
-
 		public function getSubscribedDelegates() {
 			return array(
 				array(
@@ -60,7 +50,9 @@
 
 		public function install() {
 			if (!file_exists(DOCROOT . '/extensions/facebook_toolkit/lib/facebook-php-sdk/src/facebook.php')) {
-				if(isset(Administration::instance()->Page)){
+
+				if(isset(Administration::instance()->Page)) {
+
 					Administration::instance()->Page->pageAlert(__('Could not find Facebook SDK at "extensions/facebook_toolkit/lib/facebook-php-sdk/src/facebook.php". See readme for more info.'));
 				}
 				return false;
@@ -69,6 +61,7 @@
 		}
 
 		public function uninstall() {
+
 			Symphony::Configuration()->remove('facebook');
 			return Symphony::Configuration()->write();
 		}
