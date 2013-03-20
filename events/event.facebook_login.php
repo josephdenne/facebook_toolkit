@@ -14,7 +14,7 @@
 						 'name' => 'Facebook Login',
 						 'author' => array('name' => 'Joseph Denne',
 										   'website' => 'http://josephdenne.com',
-										   'email' => 'me@josephdenne.com'),
+										   'email' => 'mail@josephdenne.com'),
 						 'version' => '1.0',
 						 'release-date' => '2011-11-19',
 						 'trigger-condition' => 'A valid Facebook session');
@@ -98,4 +98,3 @@
 			return $result;
 		}
 	}
-

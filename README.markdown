@@ -1,8 +1,8 @@
 # Facebook toolkit
 
 * Version: 1.1
-* Author: Joseph Denne (me@josephdenne.com)
-* Build Date: 30 September 2012
+* Author: Joseph Denne (mail@josephdenne.com)
+* Build Date: 20 March 2013
 * Requirements: Symphony 2.2 or later
 
 ## Summary
@@ -34,7 +34,6 @@ There are two main uses for this extension:
 2. The provision of a CMS backed Facebook application under facebook.com
 
 1.
-
 Piggy backing Facebook for login functionality on a site removes the requirement for potentially complex CRM within a build as you do not have to concern yourself with concepts such as user account validation, sign up forms and profile management.
 
 In addition, because Facebook accounts are socially connected, the accuracy of the data that it provides is higher, going some way to combating issues such as spam.
@@ -44,7 +43,6 @@ Using Facebook for authentication does not remove your ability to collect user d
 Note: this extension can happily live alongside the members extension, providing your users with a choice of login method
 
 2.
-
 As Facebook applications grow in complexity and scope, there is a growing need for a content management solution to enable content updates and user generated content moderation.
 
 This extension enables Symphony in this context.
@@ -107,13 +105,13 @@ There are two options for the manifestation of the login button:
 
 1.
 
-	<div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="1"></div>
+	<div class="fb-login-button" perms="email,user_birthday" data-show-faces="false" data-width="200" data-max-rows="1"></div>
 
 ![Standard Facebook login button](http://josephdenne.com/workspace/images/screenshots/facebook-toolkit/standard-login-button.png)
 
 You can change the text of this button by placing your own copy within the div:
 
-	<div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="1">Sign in with Facebook</div>
+	<div class="fb-login-button" perms="email,user_birthday" data-show-faces="false" data-width="200" data-max-rows="1">Sign in with Facebook</div>
 
 ![Modified text within the Facebook login button](http://josephdenne.com/workspace/images/screenshots/facebook-toolkit/modified-login-button.png)
 
@@ -162,3 +160,10 @@ No data about the user can be retrieved though.
 	</facebook>
 
 [CHANGES]
+
+1.1
+
+- Symphony 2.3 compatibility
+- Adds Facebook API key for access via frontend page params
+- Updates Facebook PHP SDK to 3.2.0, and includes it as a submodule
+- Documentation updates

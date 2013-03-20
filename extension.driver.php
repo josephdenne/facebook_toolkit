@@ -2,13 +2,13 @@
 
 	Class extension_facebook_toolkit extends Extension {
 
-		public function about(){
+		public function about() {
 			return array('name' => 'Facebook Toolkit',
 						 'version' => '1.1',
 						 'release-date' => '2012-10-01',
 						 'author' => array('name' => 'Joseph Denne',
 										   'website' => 'http://josephdenne.com/',
-										   'email' => 'me@josephdenne.com')
+										   'email' => 'mail@josephdenne.com')
 				 		);
 		}
 
@@ -57,7 +57,7 @@
 				),
 			);
 		}
-		
+
 		public function install() {
 			if (!file_exists(DOCROOT . '/extensions/facebook_toolkit/lib/facebook-php-sdk/src/facebook.php')) {
 				if(isset(Administration::instance()->Page)){
@@ -67,13 +67,13 @@
 			}
 			return true;
 		}
-		
+
 		public function uninstall() {
 			Symphony::Configuration()->remove('facebook');
 			return Symphony::Configuration()->write();
 		}
 
-		public function cbAppendPreferences($context){
+		public function cbAppendPreferences($context) {
 
 			$group = new XMLElement('fieldset');
 			$group->setAttribute('class', 'settings');
@@ -95,11 +95,11 @@
 		}
 		
 		public function appendAppParams($context) {
-			//Adds the app key to Symphony page params. 
+
+			// Adds the app key to Symphony page params. 
 			$context['params']['facebook-application-id'] = Symphony::Configuration()->get('application_id', 'facebook');
-			
-			//No reason to have the application secret output as part of page params, but leaving this here anyway. 
+
+			// No reason to have the application secret output as part of page params, but leaving this here anyway. 
 			//$context['params']['facebook-app-secret'] = Symphony::Configuration()->get('application_secret', 'facebook');
 		}
 	}
-

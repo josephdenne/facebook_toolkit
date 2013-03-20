@@ -20,7 +20,7 @@
 						padding: 4px;
 						border-radius: 4px;
 					}
-					
+
 					#facebook-toolkit-debug-container a {
 						display: block;
 						color: #eee;

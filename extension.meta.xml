@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 <extension id="facebook_toolkit" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	<name>Facebook Toolkit</name>
 	<description>Provide baseline functionality for Facebook applications and Facebook authenticating sites</description>
@@ -13,7 +13,7 @@
 		<author>
 			<name github="josephdenne" symphony="Joseph">Joseph Denne</name>
 			<website>http://josephdenne.com/</website>
-			<email>me@josephdenne.com</email>
+			<email>mail@josephdenne.com</email>
 		</author>
 		<author>
 			<name github="henrysingleton" symphony="Henry">Henry Singleton</name>
